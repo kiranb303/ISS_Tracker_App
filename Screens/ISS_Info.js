@@ -6,18 +6,7 @@ export default class ISS_Location extends React.Component{
         super();
         this.state = {location: {} };
     }
-    getISSlocation = async()=>{
-        axios.get("https://api.wheretheiss.at/v1/satellites/25544").then(
-            response=>{
-                this.setState({location: response.data});
-                Alert.alert(this.state.location);
-            }
-        ).catch(error=>{
-            Alert.alert(error.message);
-        });
-    }
-
-    componentDidMount(){
+     componentDidMount(){
         this.getISSlocation();
         try{
             setInterval(async()=>{
@@ -27,6 +16,18 @@ export default class ISS_Location extends React.Component{
             console.log(error);
         }
     }
+    getISSlocation =()=>{
+        axios.get("https://api.wheretheiss.at/v1/satellites/25544").then(
+            response=>{
+                this.setState({location: response.data});
+               // Alert.alert(this.state.location);
+            }
+        ).catch(error=>{
+            Alert.alert(error.message);
+        });
+    }
+
+   
 
     render(){
         if(Object.keys(this.state.location).length===0){
